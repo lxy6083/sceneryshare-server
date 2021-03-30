@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxy.sceneryshare.dao.SceneryMapper">
+    <resultMap id="BaseResultMap" type="com.lxy.sceneryshare.domain.Scenery" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="CHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="coordinate" property="coordinate" jdbcType="CHAR"/>
+        <result column="province" property="province" jdbcType="CHAR"/>
+        <result column="city" property="city" jdbcType="CHAR"/>
+        <result column="district" property="district" jdbcType="CHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id,name,type,coordinate,province,city,district,parent_id,flag,create_time,update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.lxy.sceneryshare.domain.Scenery">
+        insert into scenery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="coordinate != null">
+                coordinate,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="district != null">
+                district,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            flag,create_time,update_time,
+        </trim>
+        <trim prefix=" values (" suffix=")" prefixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="coordinate != null">
+                #{coordinate},
+            </if>
+            <if test="province != null">
+                #{province},
+            </if>
+            <if test="city != null">
+                #{city},
+            </if>
+            <if test="district != null">
+                #{district},
+            </if>
+            <if test="parentId != null">
+                #{parentId},
+            </if>
+            1,now(),now()
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.lxy.sceneryshare.domain.Scenery">
+        update scenery
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="coordinate != null">
+                coordinate = #{coordinate},
+            </if>
+            <if test="province != null">
+                province = #{province},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="district != null">
+                district = #{district},
+            </if>
+            <if test="parentId != null">
+                parentId = #{parentId},
+            </if>
+            <if test="flag != null">
+                flag = #{flag},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from scenery where id = #{id}
+    </delete>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from scenery
+        where id = #{id}
+    </select>
+
+    <select id="getAllScenery" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from scenery
+    </select>
+
+    <select id="getFirstScenery" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from scenery
+        where parent_id is null
+        and flag = 1
+    </select>
+
+    <select id="getSecondScenery" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from scenery
+        where parent_id is not null
+        and flag = 1
+    </select>
+
+    <update id="toggleFlag" parameterType="java.util.HashMap">
+        update scenery
+        set flag = #{flag}
+        where id = #{id}
+    </update>
+
+    <update id="updateType" parameterType="java.util.HashMap">
+        update scenery
+        set type = #{type}
+        where id = #{id}
+    </update>
+
+    <update id="updateParentId" parameterType="java.util.HashMap">
+        update scenery
+        set parent_id = #{parentId}
+        where id = #{id}
+    </update>
+</mapper>

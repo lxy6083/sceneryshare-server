@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxy.sceneryshare.dao.SceneryShareMapper">
+    <resultMap id="BaseResultMap" type="com.lxy.sceneryshare.domain.SceneryShare" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="scenery_id" property="sceneryId" jdbcType="INTEGER"/>
+        <result column="weather" property="weather" jdbcType="INTEGER"/>
+        <result column="time_bucket" property="timeBucket" jdbcType="INTEGER"/>
+        <result column="season" property="season" jdbcType="INTEGER"/>
+        <result column="bearing" property="bearing" jdbcType="INTEGER"/>
+        <result column="essence" property="essence" jdbcType="TINYINT"/>
+        <result column="visible" property="visible" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id,user_id,title,content,pic,scenery_id,weather,time_bucket,season,bearing,essence,visible,create_time,update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.lxy.sceneryshare.domain.SceneryShare">
+        insert into sceneryshare
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="sceneryId != null">
+                scenery_id,
+            </if>
+            <if test="weather != null">
+                weather,
+            </if>
+            <if test="timeBucket != null">
+                time_bucket,
+            </if>
+            <if test="season != null">
+                season,
+            </if>
+            <if test="bearing != null">
+                bearing,
+            </if>
+            essence,visible,create_time,update_time,
+        </trim>
+        <trim prefix=" values (" suffix=")" prefixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="pic != null">
+                #{pic},
+            </if>
+            <if test="sceneryId != null">
+                #{sceneryId},
+            </if>
+            <if test="weather != null">
+                #{weather},
+            </if>
+            <if test="timeBucket != null">
+                #{timeBucket},
+            </if>
+            <if test="season != null">
+                #{season},
+            </if>
+            <if test="bearing != null">
+                #{bearing},
+            </if>
+            0,1,now(),now()
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.lxy.sceneryshare.domain.SceneryShare">
+        update sceneryshare
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="pic != null">
+                pic = #{pic},
+            </if>
+            <if test="sceneryId != null">
+                scenery_id = #{sceneryId},
+            </if>
+            <if test="weather != null">
+                weather = #{weather},
+            </if>
+            <if test="timeBucket != null">
+                time_bucket = #{timeBucket},
+            </if>
+            <if test="season != null">
+                season = #{season},
+            </if>
+            <if test="bearing != null">
+                bearing = #{bearing},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from sceneryshare where id = #{id}
+    </delete>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        where id = #{id}
+    </select>
+
+    <select id="getSceneryByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        where user_id = #{userId}
+    </select>
+
+    <select id="getAllSceneryShare" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        order by id desc
+    </select>
+
+    <select id="getByWeather" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        where weather = #{weather}
+    </select>
+
+    <select id="getByTimeBucket" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        where time_bucket = #{timeBucket}
+    </select>
+
+    <select id="getBySeason" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select <include refid="BaseColumnList"/>
+        from sceneryshare
+        where season = #{season}
+    </select>
+
+    <update id="toggleEssence" parameterType="java.util.HashMap">
+        update sceneryshare
+        set essence = #{essence}
+        where id = #{id}
+    </update>
+
+    <select id="getCountByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*)
+        from sceneryshare
+        where user_id = #{userId}
+    </select>
+
+    <update id="toggleVisible" parameterType="java.util.HashMap">
+        update sceneryshare
+        set essence = #{visible}
+        where id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxy.sceneryshare.dao.FeedbackMapper">
+    <resultMap id="BaseResultMap" type="com.lxy.sceneryshare.domain.Feedback" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="opinion" property="opinion" jdbcType="CHAR"/>
+        <result column="feedback" property="feedback" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id,user_id,admin_id,opinion,feedback,create_time,update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.lxy.sceneryshare.domain.Feedback">
+        insert into feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="adminId != null">
+                admin_id,
+            </if>
+            <if test="opinion != null">
+                opinion,
+            </if>
+            <if test="feedback != null">
+                feedback,
+            </if>
+            create_time,update_time,
+        </trim>
+        <trim prefix=" values (" suffix=")" prefixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="adminId != null">
+                #{adminId},
+            </if>
+            <if test="opinion != null">
+                #{opinion},
+            </if>
+            <if test="feedback != null">
+                #{feedback},
+            </if>
+            now(),now()
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.lxy.sceneryshare.domain.Feedback">
+        update feedback
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="adminId != null">
+                admin_id = #{adminId},
+            </if>
+            <if test="opinion != null">
+                opinion = #{opinion},
+            </if>
+            <if test="feedback != null">
+                feedback = #{feedback},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from feedback where id = #{id}
+    </delete>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from feedback
+        where id = #{id}
+    </select>
+
+    <select id="getAllFeedback" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from feedback
+        order by id desc
+    </select>
+
+    <select id="getFeedbackByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from feedback
+        where user_id = #{userId}
+        order by id desc
+    </select>
+
+    <select id="getFeedbackByAdminId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from feedback
+        where admin_id = #{adminId}
+        order by id desc
+    </select>
+</mapper>
