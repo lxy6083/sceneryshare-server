@@ -16,11 +16,12 @@ public interface CollectService {
     public boolean insert(Collect collect);
 
     /**
-     * 取消收藏
-     * @param id
+     *取消收藏
+     * @param userId
+     * @param sceneryshareId
      * @return
      */
-    public boolean delete(Integer id);
+    public boolean delete(Integer userId, Integer sceneryshareId);
 
 
     /**

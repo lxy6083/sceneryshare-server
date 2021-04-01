@@ -33,13 +33,24 @@ public class RankServiceImpl implements RankService {
     }
 
     /**
-     * 通过动态id查询动态的平均评分
+     * 获取总分
      * @param sceneryshareId
      * @return
      */
-
     @Override
-    public float getAverageScore(Integer sceneryshareId) {
-        return mapper.getAverageScore(sceneryshareId);
+    public int getScoreSum(Integer sceneryshareId) {
+        return mapper.getScoreSum(sceneryshareId);
     }
+
+    /**
+     * 获取总人数
+     * @param sceneryshareId
+     * @return
+     */
+    @Override
+    public int getScoreNum(Integer sceneryshareId) {
+        return mapper.getScoreSum(sceneryshareId);
+    }
+
+
 }

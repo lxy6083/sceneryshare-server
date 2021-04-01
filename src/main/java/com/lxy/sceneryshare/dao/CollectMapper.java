@@ -21,10 +21,11 @@ public interface CollectMapper {
 
     /**
      *取消收藏
-     * @param id
+     * @param userId
+     * @param sceneryshareId
      * @return
      */
-    public int delete(Integer id);
+    public int delete(@Param("userId") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
 
 
     /**

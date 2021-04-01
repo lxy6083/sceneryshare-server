@@ -23,10 +23,18 @@ public interface RankService {
     public Rank getMark(@Param("userid") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
 
     /**
-     * 通过动态id查询动态的平均评分
+     * 获取总分
      * @param sceneryshareId
      * @return
      */
-    public float getAverageScore(Integer sceneryshareId);
+    public int getScoreSum(Integer sceneryshareId);
+
+    /**
+     * 获取总人数
+     * @param sceneryshareId
+     * @return
+     */
+
+    public int getScoreNum(Integer sceneryshareId);
 
 }

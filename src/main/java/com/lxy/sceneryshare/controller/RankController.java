@@ -72,16 +72,31 @@ public class RankController {
 
 
     /**
-     * 通过动态id查询动态的平均评分
+     * 获取总分
      * @param request
      * @return
      */
 
-    @RequestMapping(value = "/getAverageScore", method = RequestMethod.GET)
-    public Object getAverageScore(HttpServletRequest request) {
+    @RequestMapping(value = "/getScoreSum", method = RequestMethod.GET)
+    public Object getScoreSum(HttpServletRequest request) {
         String sceneryshareId = request.getParameter("sceneryshareId").trim();
-        float averageScore = service.getAverageScore(Integer.parseInt(sceneryshareId));
-        return averageScore;
+        float scoreSum = service.getScoreSum(Integer.parseInt(sceneryshareId));
+        return scoreSum;
     }
+
+
+    /**
+     * 获取总人数
+     * @param request
+     * @return
+     */
+
+    @RequestMapping(value = "/getScoreNum", method = RequestMethod.GET)
+    public Object getScoreNum(HttpServletRequest request) {
+        String sceneryshareId = request.getParameter("sceneryshareId").trim();
+        float scoreNum= service.getScoreNum(Integer.parseInt(sceneryshareId));
+        return scoreNum;
+    }
+
 
 }

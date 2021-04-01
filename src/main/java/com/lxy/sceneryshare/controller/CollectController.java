@@ -53,13 +53,14 @@ public class CollectController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public Object deleteCollect(HttpServletRequest request) {
-        String id = request.getParameter("id").trim();
-        Boolean isSuccess = service.delete(Integer.parseInt(id));
+        String userId = request.getParameter("userId").trim();
+        String sceneryshareId = request.getParameter("sceneryshareId").trim();
+        Boolean isSuccess = service.delete(Integer.parseInt(userId),Integer.parseInt(sceneryshareId));
         return isSuccess;
     }
 
     /**
-     * 获取用户所有的收藏列表
+     * 获取收藏列表
      * @param request
      * @return
      */

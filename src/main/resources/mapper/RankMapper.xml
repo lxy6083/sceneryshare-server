@@ -13,7 +13,7 @@
         id,user_id,sceneryshare_id
     </sql>
 
-    <insert id="insert" parameterType="com.lxy.sceneryshare.domain.Comment">
+    <insert id="insert" parameterType="com.lxy.sceneryshare.domain.Rank">
         insert into rank
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -42,14 +42,20 @@
     <select id="getMark" parameterType="java.util.HashMap" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"/>
-        from comment
+        from rank
         where user_id = #{userId}
         and sceneryshare_id = #{sceneryshareId}
     </select>
 
-    <select id="getBySceneryshareId" parameterType="java.lang.Integer" resultMap="java.lang.Float">
-        select CAST(AVG( score ) as decimal(2,2))
-        from comment
+    <select id="getScoreSum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select COALESCE(SUM(score),0) as score
+        from rank
+        where sceneryshare_id = #{sceneryshareId}
+    </select>
+
+    <select id="getScoreNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select COALESCE(COUNT(id),0) as num
+        from rank
         where sceneryshare_id = #{sceneryshareId}
     </select>
 

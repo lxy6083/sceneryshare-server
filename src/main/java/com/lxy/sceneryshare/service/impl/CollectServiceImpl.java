@@ -22,16 +22,19 @@ public class CollectServiceImpl implements CollectService {
         return mapper.insert(collect) > 0;
     }
 
+
     /**
      * 取消收藏
-     * @param id
+     * @param userId
+     * @param sceneryshareId
      * @return
      */
 
     @Override
-    public boolean delete(Integer id) {
-        return mapper.delete(id) > 0;
+    public boolean delete(Integer userId, Integer sceneryshareId) {
+        return mapper.delete(userId,sceneryshareId) > 0;
     }
+
 
     /**
      * 获取用户所有的收藏列表
