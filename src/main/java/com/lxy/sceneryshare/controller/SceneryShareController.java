@@ -39,7 +39,6 @@ public class SceneryShareController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object addSceneryShare(HttpServletRequest request, @RequestParam("file") MultipartFile picFile) {
-        System.out.println("111");
 
         JSONObject jsonObject = new JSONObject();
         String userId = request.getParameter("userId").trim();          //用户id
@@ -56,7 +55,6 @@ public class SceneryShareController {
             jsonObject.put(Consts.MSG,"图片上传失败");
             return jsonObject;
         }
-        System.out.println(222);
 
         //文件名 = 当前时间（到毫秒）+原来的文件名
         String fileName = System.currentTimeMillis() + picFile.getOriginalFilename();
@@ -88,7 +86,6 @@ public class SceneryShareController {
             sceneryShare.setSeason(Integer.parseInt(season));
             sceneryShare.setBearing(Integer.parseInt(bearing));
             boolean flag = sceneryShareService.insert(sceneryShare);
-            System.out.println(flag);
 
             if (flag) {
                 jsonObject.put(Consts.CODE,1);
@@ -228,18 +225,17 @@ public class SceneryShareController {
     }
 
     /**
-     * 通过用户id获取动态列表
+     * 通过主键获取动态
      * @param request
      * @return
      */
 
-    @RequestMapping(value = "/getSceneryByUserId", method = RequestMethod.GET)
+    @RequestMapping(value = "/getByPrimaryKey", method = RequestMethod.GET)
 
-    public Object getSceneryByUserId(HttpServletRequest request) {
-        String userId = request.getParameter("userId").trim();
-        List<SceneryShare> sceneryByUserId = sceneryShareService.getSceneryByUserId(Integer.parseInt(userId));
-        return sceneryByUserId;
+    public Object getByPrimaryKey(HttpServletRequest request) {
+        String id = request.getParameter("id").trim();
+        SceneryShare sceneryShare = sceneryShareService.getByPrimaryKey(Integer.parseInt(id));
+        return sceneryShare;
     }
-
 
 }

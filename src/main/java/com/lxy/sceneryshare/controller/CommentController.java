@@ -80,7 +80,8 @@ public class CommentController {
     @RequestMapping(value = "/getBySceneryshareId",method = RequestMethod.GET)
     public Object getBySceneryshareId(HttpServletRequest request) {
         String sceneryshareId = request.getParameter("sceneryshareId").trim();
-        List<Comment> comments = commentService.getByUserId(Integer.parseInt(sceneryshareId));
+        List<Comment> comments = commentService.getBySceneryshareId(Integer.parseInt(sceneryshareId));
+
         return comments;
     }
 
