@@ -71,4 +71,19 @@ public class CollectController {
         List<Collect> collectList = service.getAllCollect(Integer.parseInt(userId));
         return collectList;
     }
+
+    /**
+     * 是否收藏
+     * @param request
+     * @return
+     */
+
+    @RequestMapping(value = "/isCollect", method = RequestMethod.GET)
+    public Object isCollect(HttpServletRequest request) {
+        String sceneryshareId = request.getParameter("sceneryshareId").trim();
+        String userId = request.getParameter("userId").trim();
+        boolean isCollect = service.isCollect(Integer.parseInt(sceneryshareId),Integer.parseInt(userId));
+        return isCollect;
+    }
+
 }

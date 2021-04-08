@@ -45,4 +45,15 @@ public class CollectServiceImpl implements CollectService {
     public List<Collect> getAllCollect(Integer userId) {
         return mapper.getAllCollect(userId);
     }
+
+    /**
+     * 是否收藏
+     * @param sceneryshareId
+     * @param userId
+     * @return
+     */
+    @Override
+    public boolean isCollect(Integer sceneryshareId, Integer userId) {
+        return mapper.isCollect(sceneryshareId,userId) > 0;
+    }
 }

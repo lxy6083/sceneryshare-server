@@ -29,4 +29,12 @@ public interface CollectService {
      * @return
      */
     public List<Collect> getAllCollect(Integer userId);
+
+    /**
+     * 是否收藏
+     * @param sceneryshareId
+     * @param userId
+     * @return
+     */
+    public boolean isCollect(Integer sceneryshareId, Integer userId);
 }

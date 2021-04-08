@@ -34,4 +34,12 @@ public interface CollectMapper {
      */
     public List<Collect> getAllCollect(Integer userId);
 
+    /**
+     * 是否收藏
+     * @param sceneryshareId
+     * @param userId
+     * @return
+     */
+    public int isCollect(@Param("sceneryshareId") Integer sceneryshareId, @Param("userId") Integer userId);
+
 }
