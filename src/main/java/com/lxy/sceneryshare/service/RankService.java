@@ -20,7 +20,7 @@ public interface RankService {
      * 通过userId和sceneryId查询评分信息
      * @return
      */
-    public Rank getMark(@Param("userid") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
+    public Integer getMark(@Param("userid") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
 
     /**
      * 获取总分
@@ -36,5 +36,12 @@ public interface RankService {
      */
 
     public int getScoreNum(Integer sceneryshareId);
+
+    /**
+     * 获取平均分
+     * @param sceneryshareId
+     * @return
+     */
+    public double getAvgScore(Integer sceneryshareId);
 
 }

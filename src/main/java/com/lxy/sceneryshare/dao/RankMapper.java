@@ -20,7 +20,7 @@ public interface RankMapper {
      * 通过userId和sceneryId查询评分信息
      * @return
      */
-    public Rank getMark(@Param("userId") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
+    public Integer getMark(@Param("userId") Integer userId, @Param("sceneryshareId") Integer sceneryshareId);
 
     /**
      * 获取总分

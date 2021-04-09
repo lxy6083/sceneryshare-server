@@ -7,10 +7,11 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="sceneryshare_id" property="sceneryshareId" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="BaseColumnList">
-        id,user_id,sceneryshare_id
+        id,user_id,sceneryshare_id,score
     </sql>
 
     <insert id="insert" parameterType="com.lxy.sceneryshare.domain.Rank">
@@ -25,6 +26,9 @@
             <if test="sceneryshareId != null">
                 sceneryshare_id,
             </if>
+            <if test="score != null">
+                score,
+            </if>
         </trim>
         <trim prefix=" values (" suffix=")" prefixOverrides=",">
             <if test="id != null">
@@ -36,12 +40,14 @@
             <if test="sceneryshareId != null">
                 #{sceneryshareId},
             </if>
+            <if test="score != null">
+                #{score}
+            </if>
         </trim>
     </insert>
 
-    <select id="getMark" parameterType="java.util.HashMap" resultMap="BaseResultMap">
-        select
-        <include refid="BaseColumnList"/>
+    <select id="getMark" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        select COALESCE(SUM(score),0) as score
         from rank
         where user_id = #{userId}
         and sceneryshare_id = #{sceneryshareId}
