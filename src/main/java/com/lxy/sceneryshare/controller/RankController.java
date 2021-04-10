@@ -38,13 +38,11 @@ public class RankController {
         rank.setUserId(Integer.parseInt(userId));
         rank.setScore(Integer.parseInt(score));
 
-        Integer mark = service.getMark(Integer.parseInt(sceneryshareId), Integer.parseInt(userId));
+        Integer mark = service.getMark(Integer.parseInt(userId), Integer.parseInt(sceneryshareId));
         if (mark > 0) {
-            System.out.println(222);
             jsonObject.put(Consts.CODE,0);
             jsonObject.put(Consts.MSG,"已评分，请勿重复评分");
         } else {
-            System.out.println(111);
             boolean isSuccess = service.insert(rank);
             if (isSuccess) {
                 jsonObject.put(Consts.CODE,1);

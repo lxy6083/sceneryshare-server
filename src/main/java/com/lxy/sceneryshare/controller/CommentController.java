@@ -28,7 +28,7 @@ public class CommentController {
         JSONObject jsonObject = new JSONObject();
         String userId = request.getParameter("userId").trim();
         String sceneryshareId = request.getParameter("sceneryshareId").trim();
-        String content = request.getParameter("contnet").trim();
+        String content = request.getParameter("content").trim();
 
         Comment comment = new Comment();
         comment.setUserId(Integer.parseInt(userId));

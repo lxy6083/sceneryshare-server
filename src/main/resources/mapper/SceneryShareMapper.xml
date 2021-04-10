@@ -143,6 +143,7 @@
         select <include refid="BaseColumnList"/>
         from sceneryshare
         where user_id = #{userId}
+        order by id desc
     </select>
 
     <select id="getAllSceneryShare" resultMap="BaseResultMap">

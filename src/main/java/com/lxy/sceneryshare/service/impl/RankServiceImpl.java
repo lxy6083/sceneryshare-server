@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 @Service
 public class RankServiceImpl implements RankService {
@@ -67,7 +68,7 @@ public class RankServiceImpl implements RankService {
         if (scoreNum == 0) {
             scoreNum = 1;
         }
-        double avgScore = new BigDecimal(scoreSum / scoreNum).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+        double avgScore = new BigDecimal((float)scoreSum / scoreNum).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
         return avgScore;
     }
 
