@@ -86,4 +86,17 @@ public class CollectController {
         return isCollect;
     }
 
+    /**
+     * 通过动态id获取收藏数
+     * @param request
+     * @return
+     */
+
+    @RequestMapping(value = "/getCollectNum", method = RequestMethod.GET)
+    public Object getCollectNum(HttpServletRequest request) {
+        String sceneryshareId = request.getParameter("sceneryshareId").trim();
+        int collectNum = service.getCollectNum(Integer.parseInt(sceneryshareId));
+        return collectNum;
+    }
+
 }

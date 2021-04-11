@@ -62,4 +62,9 @@
         and sceneryshare_id = #{sceneryshareId}
     </select>
 
+    <select id="getCollectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select COUNT(*)
+        from collect
+        where sceneryshare_id = #{sceneryshareId}
+    </select>
 </mapper>

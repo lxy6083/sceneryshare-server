@@ -37,4 +37,11 @@ public interface CollectService {
      * @return
      */
     public boolean isCollect(Integer sceneryshareId, Integer userId);
+
+    /**
+     * 通过动态id获取收藏数
+     * @param sceneryshareId
+     * @return
+     */
+    public int getCollectNum(Integer sceneryshareId);
 }

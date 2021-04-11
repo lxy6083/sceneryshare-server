@@ -42,4 +42,10 @@ public interface CollectMapper {
      */
     public int isCollect(@Param("sceneryshareId") Integer sceneryshareId, @Param("userId") Integer userId);
 
+    /**
+     * 通过动态id获取收藏数
+     * @param sceneryshareId
+     * @return
+     */
+    public int getCollectNum(Integer sceneryshareId);
 }

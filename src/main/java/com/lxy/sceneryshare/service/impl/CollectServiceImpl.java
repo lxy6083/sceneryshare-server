@@ -56,4 +56,14 @@ public class CollectServiceImpl implements CollectService {
     public boolean isCollect(Integer sceneryshareId, Integer userId) {
         return mapper.isCollect(sceneryshareId,userId) > 0;
     }
+
+    /**
+     * 通过动态id获取收藏数
+     * @param sceneryshareId
+     * @return
+     */
+    @Override
+    public int getCollectNum(Integer sceneryshareId) {
+        return mapper.getCollectNum(sceneryshareId);
+    }
 }
