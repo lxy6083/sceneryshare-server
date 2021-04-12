@@ -2,6 +2,9 @@ package com.lxy.sceneryshare.domain;
 
 import java.util.Date;
 
+/**
+ * 收藏
+ */
 public class Collect {
     private Integer id;             //主键
     private Integer userId;         //用户id

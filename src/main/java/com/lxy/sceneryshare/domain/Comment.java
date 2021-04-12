@@ -2,6 +2,9 @@ package com.lxy.sceneryshare.domain;
 
 import java.util.Date;
 
+/**
+ * 评论
+ */
 public class Comment {
     private Integer id;             //主键
     private Integer userId;         //用户id

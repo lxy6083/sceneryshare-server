@@ -4,6 +4,9 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
+/**
+ * 意见反馈
+ */
 public class Feedback {
     private Integer id;         //主键
     private Integer userId;     //用户ID

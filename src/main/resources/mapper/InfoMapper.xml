@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxy.sceneryshare.dao.InfoMapper">
+    <resultMap id="BaseResultMap" type="com.lxy.sceneryshare.domain.Info" >
+        <result column="date" property="date" jdbcType="VARCHAR"/>
+        <result column="user" property="user" jdbcType="INTEGER"/>
+        <result column="scenery" property="scenery" jdbcType="INTEGER"/>
+        <result column="share" property="share" jdbcType="INTEGER"/>
+    </resultMap>
+
+    
+    <select id="getLatestWeekNew" resultMap="BaseResultMap">
+        SELECT a.date as date, IFNULL(b.user,0)AS user , IFNULL(c.scenery,0) AS scenery, IFNULL(d.share,0) AS share
+FROM (
+       SELECT CURDATE() AS date
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 1 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 2 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 3 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 4 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 5 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 6 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 15 DAY) AS item
+       UNION ALL
+       SELECT DATE_SUB(CURDATE(), INTERVAL 16 DAY) AS item
+
+     ) a LEFT JOIN (SELECT DATE(create_time) AS date,count(date_format(create_time,'%Y-%m-%d')) AS user
+                     FROM user
+                     GROUP BY DATE(create_time)
+                   ) b ON a.date = b.date
+        LEFT JOIN (SELECT DATE(create_time) AS date,count(date_format(create_time,'%Y-%m-%d')) AS scenery
+             FROM scenery
+             GROUP BY DATE(create_time)
+            ) c ON a.date = c.date
+        LEFT JOIN (SELECT DATE(create_time) AS date,count(date_format(create_time,'%Y-%m-%d')) AS share
+             FROM sceneryshare
+             GROUP BY DATE(create_time)
+            ) d ON a.date = d.date
+        order by a.date
+    </select>
+
+</mapper>

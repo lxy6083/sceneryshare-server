@@ -1,5 +1,8 @@
 package com.lxy.sceneryshare.domain;
 
+/**
+ * 评分
+ */
 public class Rank {
     private Integer id;             //主键
     private Integer sceneryshareId; //动态id

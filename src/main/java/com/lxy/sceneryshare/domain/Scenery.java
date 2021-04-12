@@ -2,6 +2,9 @@ package com.lxy.sceneryshare.domain;
 
 import java.util.Date;
 
+/**
+ * 景点
+ */
 public class Scenery {
     private Integer id;         //主键
     private String name;        //景点名称
