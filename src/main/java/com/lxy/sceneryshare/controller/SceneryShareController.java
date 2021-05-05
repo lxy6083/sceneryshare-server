@@ -183,7 +183,7 @@ public class SceneryShareController {
     public Object toggleVisible(HttpServletRequest request) {
         String visible = request.getParameter("visible").trim();
         String id = request.getParameter("id").trim();
-        boolean isSuccess = sceneryShareService.toggleEssence(new Byte(visible), Integer.parseInt(id));
+        boolean isSuccess = sceneryShareService.toggleVisible(new Byte(visible), Integer.parseInt(id));
         return isSuccess;
     }
 

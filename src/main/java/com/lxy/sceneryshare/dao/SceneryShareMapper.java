@@ -108,6 +108,6 @@ public interface SceneryShareMapper {
      * @return
      */
 
-    public int toggleVisible(@Param("essence") Byte visible, @Param("id") Integer id);
+    public int toggleVisible(@Param("visible") Byte visible, @Param("id") Integer id);
 
 }

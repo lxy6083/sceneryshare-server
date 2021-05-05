@@ -184,7 +184,7 @@
 
     <update id="toggleVisible" parameterType="java.util.HashMap">
         update sceneryshare
-        set essence = #{visible}
+        set visible = #{visible}
         where id = #{id}
     </update>
 

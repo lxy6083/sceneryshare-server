@@ -65,7 +65,7 @@ public class FeedbackController {
 
         Feedback feedback = feedbackService.getByPrimaryKey(Integer.valueOf(id));
         feedback.setFeedback(reply);
-        feedback.setUserId(Integer.parseInt(adminId));
+        feedback.setAdminId(Integer.parseInt(adminId));
 
         boolean flag = feedbackService.update(feedback);
 
@@ -100,7 +100,7 @@ public class FeedbackController {
      */
     @RequestMapping(value = "/getFeedbackByUserId",method = RequestMethod.GET)
     public Object getFeedbackByUserId(HttpServletRequest request) {
-        String userId = request.getParameter("id").trim();
+        String userId = request.getParameter("userId").trim();
         List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(Integer.parseInt(userId));
         return feedbackList;
     }
